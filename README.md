@@ -50,7 +50,7 @@ Harbor Satellite addresses several key issues:
 
 ### Brief Overview of Components
 
-Harbor Satellite consists of two main components: **Ground Control** (located in the cloud or a location with reliable connectivity) and **Satellite** (deployed at the edge location). Additionally, there is a central repository that hosts container images and OCI artifacts, which are replicated by Harbor Satellite.
+Harbor Satellite consists of three main components: **Ground Control** (located in the cloud or a location with reliable connectivity) and **Satellite** (deployed at the edge location). Additionally, there is a ***Central Repository*** that hosts container images and OCI artifacts, which are replicated by Harbor Satellite.
 
 - #### Ground Control
   Ground Control is responsible for monitoring Satellites deployed at edge locations. It authenticates Satellites and provides the capability to specify which images or artifacts should be replicated. Ground Control manages permissions for Satellites, creates credentials for them, and securely provides these credentials.
@@ -60,3 +60,5 @@ Harbor Satellite consists of two main components: **Ground Control** (located in
 - #### Satellite
   The Satellite component operates at remote edge locations. It replicates images from the central repository and includes an **OCI Zot repository**, which runs alongside it to store images locally at the edge. Alternatively, users can provide their own repository if they prefer not to use the built-in Zot repository.
 
+- #### Central Repository
+  The central repository is present with the Ground Control over the network and the Satellite replicates images from this. The credentials for this repository is provided to the Satellite by the Ground Control.
