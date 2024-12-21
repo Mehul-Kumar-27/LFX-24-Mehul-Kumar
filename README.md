@@ -62,3 +62,31 @@ Harbor Satellite consists of three main components: **Ground Control** (located 
 
 - #### Central Repository
   The central repository is present with the Ground Control over the network and the Satellite replicates images from this. The credentials for this repository is provided to the Satellite by the Ground Control.
+
+
+### Workflow of the System
+
+#### Step 1: Create State Artifact for Each Group
+1. A patched version of Harbor uses a replication rule where:
+   - Users specify the projects to replicate.
+   - The `group name` is set as the namespace.
+
+2. When the rule executes:
+   - It creates a JSON state artifact containing image paths to track.
+   - This artifact is pushed to the `satellite` project in Harbor as an OCI artifact under the `group name`.
+
+3. Harbor sends a JSON request to the `ground control` URL (registry URL), which:
+   - Creates the satellite project and the group repository.
+   - Adds the state artifact to the repository.
+
+#### Step 2: Register Satellite Under a Group
+1. The replication rule updates the `ground control` database with group details (e.g., group name and projects).
+2. Users register a satellite to the group via a POST request. On success, the system provides a `token` for satellite authentication.
+3. The satellite uses this token to authenticate with `ground control` and receives authentication credentials in return.
+
+#### Step 3: Start Replication
+1. The satellite regularly replicates images/artifacts based on the state artifact after the initial replication.
+
+![alt text](images/image.png)
+
+
