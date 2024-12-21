@@ -1,3 +1,4 @@
+![alt text](images/header.png)
 # CNCF Linux Foundation Mentorship '24: Harbor Satellite
 
 This document serves as my final report for the CNCF Linux Foundation Mentorship '24 program. During this mentorship, I had the privilege of working with the Harbor community and contributing to the development of **Harbor Satellite**, a key project aimed at enhancing containerized artifact distribution for edge environments.
